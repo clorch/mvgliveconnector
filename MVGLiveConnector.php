@@ -27,6 +27,7 @@ class MVGLiveConnector {
 	
 	public function  __construct() { 
 		$this->setOptions();
+		date_default_timezone_set('Europe/Berlin');
 	}
 
 	public function getLiveData($station, $entries = 4) {
@@ -130,7 +131,7 @@ class MVGLiveConnector {
 
 	private function getString($stringId) {
 		if ($stringId == 0) {
-			return 'NULL';
+			return '';
 		} else {
 			return $this->_stringMap[$stringId - 1];
 		}
