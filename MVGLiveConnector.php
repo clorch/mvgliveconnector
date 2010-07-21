@@ -78,6 +78,14 @@ class MVGLiveConnector {
 		$answer = curl_exec($ch);
 		curl_close($ch);
 
+		if (substr($answer, 0, 4) <> '//OK') {
+			if (strpos($answer, 'de.swm.mvglive.gwt.client.departureView.UnknownStopNameException') !== false) {
+				throw new Exception("Unknown station");
+			} else {
+				throw new Exception("Error downloading data");
+			}
+		}
+
 		$answer = substr($answer, 4);
 		$stream = json_decode($answer);
 
